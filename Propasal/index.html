@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Surprise 💕</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #ff8fab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .card {
+    background: #c75c75;
+    padding: 30px;
+    border-radius: 22px;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    color: white;
+    position: relative;
+    z-index: 2;
+  }
+
+  .gif {
+    width: 180px;
+    margin-bottom: 15px;
+    border-radius: 14px;
+  }
+
+  h1 {
+    margin: 15px 0 25px;
+    font-size: 24px;
+  }
+
+  .buttons {
+    position: relative;
+    height: 120px;
+  }
+
+  button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    min-width: 110px;
+    min-height: 44px;
+  }
+
+  .yes {
+    background: #28a745;
+    color: white;
+    position: absolute;
+    left: 10%;
+    top: 50px;
+  }
+
+  .no {
+    background: #dc3545;
+    color: white;
+    position: fixed;   
+    left: 52%;
+    top: 69%;
+    z-index: 5;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <img class="gif"
+       src="https://gifdb.com/images/high/animated-bear-is-in-love-obdfb0txoitfinz6.webp"
+       alt="Cute Teddy">
+
+  <h1>Will you be my Valentine? 💝</h1>
+   <h1>MUMMY</h1>
+  <div class="buttons">
+    <button class="yes" onclick="yesClick()">YES 💖</button>
+    <button class="no" id="noBtn">NO 😅</button>
+  </div>
+</div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  let movedOnce = false; // 👈 KEY
+
+  function moveButton() {
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const maxX = window.innerWidth - btnWidth;
+    const maxY = window.innerHeight - btnHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top  = y + "px";
+  }
+
+  noBtn.addEventListener("click", () => {
+    if (!movedOnce) {
+      movedOnce = true;
+    }
+    moveButton();
+  });
+
+  function yesClick() {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        background:#ff8fab;
+        font-family:'Segoe UI';
+        text-align:center;
+        color:white;
+      ">
+        <img src="https://media.tenor.com/mfC-cc_TL_sAAAAM/thank-you.gif"
+             width="220" style="border-radius:16px;">
+        <h1>I knew it Mummy 😍</h1>
+        <h1>You have choosen the best option mummylu </h1>
+        <p>Advance Happy Valentine’s Day ❤️</p>
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>
