@@ -22,7 +22,7 @@
 
   .card {
     background: #c75c75;
-    padding: 30px;
+    padding: 26px;
     border-radius: 22px;
     text-align: center;
     width: 90%;
@@ -33,30 +33,33 @@
   }
 
   .gif {
-    width: 180px;
-    margin-bottom: 15px;
+    width: 150px;
+    margin-bottom: 12px;
     border-radius: 14px;
   }
 
   h1 {
-    margin: 15px 0 25px;
-    font-size: 24px;
+    margin: 8px 0 10px;
+    font-size: 22px;
   }
 
   .buttons {
     position: relative;
-    height: 120px;
+    height: 80px;
+    margin-top: 10px;
   }
 
   button {
-    padding: 12px 28px;
-    font-size: 18px;
+    font-size: 16px;
+    padding: 10px 22px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     white-space: nowrap;
-    min-width: 110px;
-    min-height: 44px;
+
+    /* 🔒 LOCK SIZE */
+    width: 110px;
+    height: 42px;
   }
 
   .yes {
@@ -64,16 +67,15 @@
     color: white;
     position: absolute;
     left: 10%;
-    top: 50px;
+    top: 18px;
   }
 
   .no {
     background: #dc3545;
     color: white;
-    position: fixed;   
-    left: 52%;
-    top: 69%;
-    z-index: 5;
+    position: absolute;
+    right: 10%;
+    top: 18px;
   }
 </style>
 </head>
@@ -86,7 +88,8 @@
        alt="Cute Teddy">
 
   <h1>Will you be my Valentine? 💝</h1>
-   <h1>MUMMY</h1>
+  <h1>MUMMY</h1>
+
   <div class="buttons">
     <button class="yes" onclick="yesClick()">YES 💖</button>
     <button class="no" id="noBtn">NO 😅</button>
@@ -95,28 +98,28 @@
 
 <script>
   const noBtn = document.getElementById("noBtn");
-  let movedOnce = false; // 👈 KEY
+  let released = false;
 
-  function moveButton() {
-    const btnWidth = noBtn.offsetWidth;
-    const btnHeight = noBtn.offsetHeight;
+  function moveNoButton() {
+    if (!released) {
+      // 🔥 RELEASE to viewport CLEANLY
+      noBtn.style.position = "fixed";
+      noBtn.style.left = "auto";
+      noBtn.style.right = "auto";
+      released = true;
+    }
 
-    const maxX = window.innerWidth - btnWidth;
-    const maxY = window.innerHeight - btnHeight;
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
 
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top  = y + "px";
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top  = `${y}px`;
   }
 
-  noBtn.addEventListener("click", () => {
-    if (!movedOnce) {
-      movedOnce = true;
-    }
-    moveButton();
-  });
+  noBtn.addEventListener("click", moveNoButton);
 
   function yesClick() {
     document.body.innerHTML = `
@@ -134,7 +137,7 @@
         <img src="https://media.tenor.com/mfC-cc_TL_sAAAAM/thank-you.gif"
              width="220" style="border-radius:16px;">
         <h1>I knew it Mummy 😍</h1>
-        <h1>You have choosen the best option mummylu </h1>
+        <h1>You have chosen the best option mummylu</h1>
         <p>Advance Happy Valentine’s Day ❤️</p>
       </div>
     `;
